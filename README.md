@@ -30,6 +30,7 @@ Prototype d’architecture cloud-native (Kubernetes + microservices Node.js) ave
 
 ## 🏗️ Architecture
 
+![image](https://github.com/user-attachments/assets/067d022d-0c76-4c09-a259-9cd80c68187d)
 
 
 ---

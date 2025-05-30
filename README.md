@@ -120,14 +120,18 @@ Accès typique :
 
 ### **1. CI/CD – Exécution des jobs et gestion des échecs/réussites**
 
-![image](https://github.com/user-attachments/assets/07831bc9-44f1-425a-9f3c-14d504c5ef3d)
-
-
-
-![image](https://github.com/user-attachments/assets/e2db5a1c-b16e-4baa-a482-fc8640c69817)
-
+# Lancement du notre runner self hosted
 
 ![image](https://github.com/user-attachments/assets/e075f722-2183-4a0c-8492-49979a0e8ef5)
+
+
+![image](https://github.com/user-attachments/assets/b5907c0a-a208-4a24-ba06-45bd836694ae)
+
+
+# Pipeline Successful
+
+![image](https://github.com/user-attachments/assets/b4660ce2-7984-4de9-975e-b54eb50c9212)
+
 
 
 ---

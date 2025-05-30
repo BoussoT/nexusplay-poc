@@ -4,6 +4,7 @@ metadata:
   name: user-service
 spec:
   replicas: 1
+  type: NodePort
   selector:
     matchLabels:
       app: user-service
@@ -42,3 +43,4 @@ spec:
   ports:
   - port: 3000
     targetPort: 3000
+    nodePort: 32122 

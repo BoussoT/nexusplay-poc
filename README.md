@@ -155,6 +155,12 @@ Accès typique :
 ### **4. notification SLACK**
 
 
+# Ajout du webhook Slack pour recevoir des notifications en cas de failed du job test de charge
+
+![image](https://github.com/user-attachments/assets/e802e0e5-c642-40b1-8c69-f6c6ece5d8cb)
+
+# Exemple 
+
 ![image](https://github.com/user-attachments/assets/3da416bf-89d4-46a6-a033-5c1f6c09d0a6)
 
 

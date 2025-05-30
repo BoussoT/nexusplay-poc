@@ -31,11 +31,11 @@ jobs:
         working-directory: ./microservices/game-service
 
       # Archive k8s manifests as artifact
-      - name: Archive K8s manifests
-        uses: actions/upload-artifact@v3
-        with:
-          name: k8s-manifests
-          path: k8s/
+      #- name: Archive K8s manifests
+       # uses: actions/upload-artifact@v3
+        #with:
+         # name: k8s-manifests
+          #path: k8s/
 
   docker-build:
     runs-on: self-hosted

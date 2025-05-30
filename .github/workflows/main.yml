@@ -1,0 +1,91 @@
+name: CI/CD NexusPlay POC
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Build & test user-service
+      - name: Install dependencies (user-service)
+        run: npm install
+        working-directory: ./microservices/user-service
+
+      - name: Test user-service
+        run: npm test || echo "No tests yet"
+        working-directory: ./microservices/user-service
+
+      # Build & test game-service
+      - name: Install dependencies (game-service)
+        run: npm install
+        working-directory: ./microservices/game-service
+
+      - name: Test game-service
+        run: npm test || echo "No tests yet"
+        working-directory: ./microservices/game-service
+
+      # Archive k8s manifests as artifact
+      - name: Archive K8s manifests
+        uses: actions/upload-artifact@v3
+        with:
+          name: k8s-manifests
+          path: k8s/
+
+  docker-build:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build user-service Docker image
+        run: |
+          eval $(minikube docker-env)
+          docker build -t user-service:latest ./microservices/user-service
+
+      - name: Build game-service Docker image
+        run: |
+          eval $(minikube docker-env)
+          docker build -t game-service:latest ./microservices/game-service
+
+  deploy:
+    runs-on: self-hosted
+    needs: docker-build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up kubectl context
+        run: |
+          kubectl config use-context minikube
+          kubectl get nodes
+
+      - name: Deploy to Minikube
+        run: |
+          kubectl apply -f k8s/
+          kubectl rollout status deployment/user-service
+          kubectl rollout status deployment/game-service
+
+  loadtest:
+    runs-on: self-hosted
+    needs: deploy
+    steps:
+      - name: Wait for services to be ready
+        run: sleep 30
+
+      - name: Test de charge sur user-service
+        run: ab -n 100 -c 10 http://$(minikube ip):32122/user/status
+
+      - name: Test de charge sur game-service
+        run: ab -n 100 -c 10 http://$(minikube ip):32122/game/play
+
+      # Notification Slack en cas d'échec du job
+      - name: Slack notify on failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"🚨 CI/CD : Le test de charge a échoué sur NexusPlay POC !"}' ${{ secrets.SLACK_WEBHOOK_URL }}

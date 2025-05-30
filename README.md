@@ -23,13 +23,12 @@ Prototype d’architecture cloud-native (Kubernetes + microservices Node.js) ave
   * Notifications d’incidents prêtes à l’emploi (webhook Slack).
 * **Monitoring** :
 
-  * Prometheus ou Grafana (selon ressources).
   * Visualisation des métriques des pods/services.
 * **DNS Haute disponibilité** : CoreDNS (K8s).
 
 ---
 
-## 🏗️ Architecture (schéma à illustrer)
+## 🏗️ Architecture
 
 
 

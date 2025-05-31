@@ -130,6 +130,8 @@ Accès typique :
 
 # Pipeline Successful
 
+![image](https://github.com/user-attachments/assets/00465cc3-2ae3-4257-9ae0-c427283d9943)
+
 ![image](https://github.com/user-attachments/assets/b4660ce2-7984-4de9-975e-b54eb50c9212)
 
 
